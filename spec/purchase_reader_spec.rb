@@ -29,20 +29,20 @@ end
 
 describe PricingCalculator do
   let(:sale_price_list) do
-    [
-      ItemPricing.new('milk', 3.97, 2, 5.00),
-      ItemPricing.new('bread', 2.17, 3, 6.00),
-      ItemPricing.new('banana', 0.99, 0, 0),
-      ItemPricing.new('apple', 0.79, 0, 0)
-    ]
+    {
+      'milk' => ItemPricing.new(3.97, 2, 5.00),
+      'bread' => ItemPricing.new(2.17, 3, 6.00),
+      'banana' => ItemPricing.new(0.99, 0, 0),
+      'apple' => ItemPricing.new(0.79, 0, 0)
+    }
   end
   let(:no_sale_price_list) do
-    [
-      ItemPricing.new('milk', 3.97, 0, 0),
-      ItemPricing.new('bread', 2.17, 0, 0),
-      ItemPricing.new('banana', 0.99, 0, 0),
-      ItemPricing.new('apple', 0.79, 0, 0)
-    ]
+    {
+      'milk' => ItemPricing.new(3.97, 0, 0),
+      'bread' => ItemPricing.new(2.17, 0, 0),
+      'banana' => ItemPricing.new(0.99, 0, 0),
+      'apple' => ItemPricing.new(0.79, 0, 0)
+    }
   end
   let(:tallied_list) { { 'milk' => 3, 'bread' => 4, 'banana' => 1, 'apple' => 1 } }
   let(:no_item_list) { {} }
