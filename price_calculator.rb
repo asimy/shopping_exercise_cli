@@ -25,10 +25,15 @@ end
 ItemPricing = Struct.new(:standard_price,
                          :sale_price,
                          :sale_quantity)
+
 LineItem = Struct.new(:item_name,
                       :quantity,
                       :purchase_price,
-                      :savings)
+                      :savings) do
+                        def <=>(itm)
+                          item_name <=> itm.item_name
+                        end
+                      end
 
 class PricingCalculator
   attr_reader :pricing_list

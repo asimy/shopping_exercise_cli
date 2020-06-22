@@ -33,7 +33,7 @@ describe PricingCalculator do
       'milk' => ItemPricing.new(3.97, 2, 5.00),
       'bread' => ItemPricing.new(2.17, 3, 6.00),
       'banana' => ItemPricing.new(0.99, 0, 0),
-      'apple' => ItemPricing.new(0.79, 0, 0)
+      'apple' => ItemPricing.new(0.89, 0, 0)
     }
   end
   let(:no_sale_price_list) do
@@ -41,7 +41,7 @@ describe PricingCalculator do
       'milk' => ItemPricing.new(3.97, 0, 0),
       'bread' => ItemPricing.new(2.17, 0, 0),
       'banana' => ItemPricing.new(0.99, 0, 0),
-      'apple' => ItemPricing.new(0.79, 0, 0)
+      'apple' => ItemPricing.new(0.89, 0, 0)
     }
   end
   let(:tallied_list) { { 'milk' => 3, 'bread' => 4, 'banana' => 1, 'apple' => 1 } }
@@ -53,6 +53,7 @@ describe PricingCalculator do
     bill << LineItem.new('bread', 4, 8.68, 0)
     bill << LineItem.new('apple', 1, 0.89, 0)
     bill << LineItem.new('banana', 1, 0.99, 0)
+    bill.sort
   end
 
   it 'returns correct pricing with no items' do
@@ -62,6 +63,6 @@ describe PricingCalculator do
 
   it 'returns correct pricing with items and no sales' do
     calc = PricingCalculator.new(no_sale_price_list)
-    expect(calc.shopping_bill(tallied_list)).to eq(purchase_bill_no_sales)
+    expect(calc.shopping_bill(tallied_list).sort).to eq(purchase_bill_no_sales)
   end
 end
