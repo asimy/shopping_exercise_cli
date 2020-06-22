@@ -47,8 +47,21 @@ describe PricingCalculator do
   let(:tallied_list) { { 'milk' => 3, 'bread' => 4, 'banana' => 1, 'apple' => 1 } }
   let(:no_item_list) { {} }
 
+  let(:purchase_bill_no_sales) do
+    bill = []
+    bill << LineItem.new('milk', 3, 11.91, 0)
+    bill << LineItem.new('bread', 4, 8.68, 0)
+    bill << LineItem.new('apple', 1, 0.89, 0)
+    bill << LineItem.new('banana', 1, 0.99, 0)
+  end
+
   it 'returns correct pricing with no items' do
     calc = PricingCalculator.new([])
     expect(calc.shopping_bill(no_item_list)).to eq([])
+  end
+
+  it 'returns correct pricing with items and no sales' do
+    calc = PricingCalculator.new(no_sale_price_list)
+    expect(calc.shopping_bill(tallied_list)).to eq(purchase_bill_no_sales)
   end
 end
